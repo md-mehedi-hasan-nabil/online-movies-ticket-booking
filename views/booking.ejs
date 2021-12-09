@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <%- include("./partials/navigation.ejs") %>
+
+    <div class="container">
+        <div class="row align-items-center" style="min-height: 80vh;">
+        <% if (data) { %>
+            <% data.forEach(item=> { %>
+                <article class="col-lg-3 mx-auto">
+                    <div class="card shadow">
+                        <div class="image-container rounded">
+                            <img src="<%- item.background %>" class="w-100" alt="img" />
+                        </div>
+                        <div class="card-body overlay">
+                            <h5 class="card-title">
+                                Name: <%- item.title %>
+                            </h5>
+                            <h6>
+                                Price: <%- item.price %>
+                            </h6>
+                            <p class="card-text">
+                                Description: <%- item.description %>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+                <div class="col-lg-8 mx-auto">
+                    <form class="border rounded p-5">
+                        <h3 class="text-center my-2">Buy your Ticket</h3>
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Available Ticket</label>
+                            <input type="number" min="0" value="12" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> Select Date</label>
+                            <div>
+                                <select class="form-select" name="movieTime">
+                                    <option value="none" selected>2020-12-02</option>
+                                    <option value="2020-12-03">2020-12-03</option>
+                                    <option value="2020-12-04">2020-12-04</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <input type="number" value="<%= item.price %>" readonly class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">
+                            <i class="fas fa-shopping-bag me-1"></i>
+                            Buy Now</button>
+                    </form>
+            </div>
+            <% }); %>
+            <% } else { %>
+                <img src="images/loading.svg" class="loading" alt="">
+            <% } %>
+            
+        </div>
+    </div>
+
+    <%- include("./partials/footer.ejs") %>
+    <%- include("./partials/scripts.ejs") %>
+                
+</body>
+
+</html>

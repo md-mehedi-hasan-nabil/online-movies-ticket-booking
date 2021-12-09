@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs") %>
+
+<body>
+    <header>
+        <h2 class="text-center py-4 bg-light text-uppercase border-bottom">
+            Online Movie Ticket Booking 
+        </h2>
+    </header>
+    <%- include("./partials/navigation.ejs") %>
+
+    <div class="container">
+        <div class="row">
+            <% if (data) { %>
+                <% data.forEach(item=> { %>
+                    <article class="col-lg-3 my-3">
+                        <div class="card shadow">
+                            <div class="image-container">
+                                <img src="<%- item.background %>" class="w-100 rounded" alt="img" />
+                            </div>
+                            <div class="card-body overlay">
+                                <h5 class="card-title">
+                                    Name: <%- item.title %>
+                                </h5>
+                                <small>
+                                    Price: <%- item.price %>
+                                </small>
+                                <!-- <p class="card-text">
+                                    <%- item.description %>
+                                </p> -->
+                                <a href="/booking/<%= item._id %> " class="btn btn-light w-100">Booking Ticket</a>
+                            </div>
+                            <!-- <div class="card-footer">
+
+                            </div> -->
+                        </div>
+                    </article>
+                    <% }); %>
+                        <% } else { %>
+                            <img src="images/loading.svg" class="loading" alt="">
+                            <% } %>
+                        </div>
+                    </div>
+
+    <%- include("./partials/footer.ejs") %>
+    <%- include("./partials/scripts.ejs") %>
+
+</body>
+
+</html>

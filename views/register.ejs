@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include("./partials/head.ejs") %>
+<body>
+    <%- include("./partials/navigation.ejs") %>
+
+        <div class="container">
+            <div class="row align-items-center" style="min-height: 80vh;">
+                <div class="col-lg-6 mx-auto py-3">
+                    <form class="border rounded p-5">
+                        <h3 class="text-center my-2">Create Your Account</h3>
+
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Email address</label>
+                            <input type="email" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" id="date" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Retype Password</label>
+                            <input type="password" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Date of Birth</label>
+                            <input type="date" max=<%= new Date().toISOString().split('T')[0] %> class="form-control date" required />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label"> Select you gender</label>
+                            <div>
+                                <select class="form-select" name="gender">
+                                    <option value="none" selected>Gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="hidden" name="id" />
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Register</button>
+                        <div class="mt-3 text-center">
+                            Already have an account? <a href="/login">Sign in</a>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <img src="/images/undraw_road_sign_mfpo.png" alt="undraw_road_sign_mfpo" class="img-fluid">
+                </div>
+            </div>
+        </div>
+
+        <%- include("./partials/footer.ejs") %>
+        <%- include("./partials/scripts.ejs") %>
+</body>
+
+</html>
