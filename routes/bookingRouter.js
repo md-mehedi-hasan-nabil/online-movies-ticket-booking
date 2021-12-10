@@ -1,8 +1,13 @@
 const express = require("express");
-const { getBookingPage } = require("../controller/bookingController");
+const {
+  getBookingPage,
+  ticketBooking,
+} = require("../controller/bookingController");
 
 const router = express.Router();
 
 router.get("/:id", getBookingPage);
+
+router.post("/", ticketBooking);
 
 module.exports = router;

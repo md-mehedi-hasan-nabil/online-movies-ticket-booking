@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include("./partials/head.ejs") %>
+    <title>Add Movies</title>
+</head>
+
+<body>
+    <%- include("./partials/navigation.ejs") %>
+
+        <div class="container">
+            <div class="row">
+                <div class="col col-md-6 mx-auto py-5">
+                    <form action="/admin" method="post" class="border rounded p-5">
+                        <h3 class="text-center my-2">Add movies items</h3>
+                        <div class="mb-3">
+                            <label class="form-label">Movie Name</label>
+                            <input type="text" name="name" class="form-control"  />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Image URL</label>
+                            <input type="text" name="imageURL" class="form-control"  />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Movie Date</label>
+                            <input type="date" name="movieDate" id="date" class="form-control" min=<%= new Date().toISOString().split('T')[0] %>  />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Price</label>
+                            <input type="number" name="price" min="0" class="form-control"  />
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea class="form-control" name="description" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-dark w-100">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <%- include("./partials/footer.ejs") %>
+        <%- include("./partials/scripts.ejs") %>
+
+</body>
+
+</html>

@@ -1,38 +1,36 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const bookingSchema = new Schema(
+const adminSchema = new Schema(
   {
     name: {
       type: String,
       trim: true,
       required: true,
     },
-    email: {
+    imageURL: {
       type: String,
       trim: true,
-      lowercase: true,
       required: true,
     },
-    availableTicket: {
-      type: Number,
-      min: 1,
-      max: 30,
+    movieDate: {
+      type: String,
       required: true,
-    },
-    availableDate: {
-      type: Date,
     },
     price: {
       type: Number,
       required: true,
     },
+    description: {
+      type: String,
+      required: true
+    }
   },
   {
     timestamps: true,
   }
 );
 
-const Booking = mongoose.model("booking", bookingSchema);
+const Admin = mongoose.model("admin", adminSchema);
 
-module.exports = Booking;
+module.exports = Admin;

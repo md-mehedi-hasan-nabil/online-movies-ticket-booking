@@ -8,24 +8,28 @@ const homeRouter = require("./routes/homeRouter");
 const loginRouter = require("./routes/loginRouter");
 const registerRouter = require("./routes/registerRouter");
 const bookingRouter = require("./routes/bookingRouter");
+const adminRouter = require("./routes/adminRouter");
+
 
 const app = express();
 const port = process.env.PORT || 4000;
 
-// use middleware
+// use middleware     
 dotenv.config();
 app.use(cors());
 
 // parse json data
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }))
+// parse application/json
+app.use(bodyParser.json())
 
 // template engines
 app.set("view engine", "ejs");
 // static folder
 app.use(express.static(path.join(__dirname, "public")));
 
-//database
+//mongoose database
 mongoose
   .connect("mongodb://localhost/movies-ticket-booking", {
     useNewUrlParser: true,
@@ -39,6 +43,7 @@ app.use("/", homeRouter);
 app.use("/login", loginRouter);
 app.use("/booking", bookingRouter);
 app.use("/register", registerRouter);
+app.use("/admin", adminRouter);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

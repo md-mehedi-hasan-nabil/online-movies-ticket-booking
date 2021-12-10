@@ -1,9 +1,8 @@
 const express = require("express");
+const { getRegisterPage } = require("../controller/registerController");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("register", { title: "Register | Create Your Account" });
-});
+router.get("/", getRegisterPage);
 
 module.exports = router;

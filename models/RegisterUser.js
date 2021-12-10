@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const bookingSchema = new Schema(
+const registerUserSchema = new Schema(
   {
     name: {
       type: String,
@@ -14,18 +14,18 @@ const bookingSchema = new Schema(
       lowercase: true,
       required: true,
     },
-    availableTicket: {
-      type: Number,
-      min: 1,
-      max: 30,
+    mobile: {
+      type: String,
       required: true,
     },
-    availableDate: {
-      type: Date,
+    password: {
+      type: String,
+      required: true
     },
-    price: {
-      type: Number,
-      required: true,
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user"
     },
   },
   {
@@ -33,6 +33,6 @@ const bookingSchema = new Schema(
   }
 );
 
-const Booking = mongoose.model("booking", bookingSchema);
+const RegisterUser = mongoose.model("register", registerUserSchema);
 
-module.exports = Booking;
+module.exports = RegisterUser;

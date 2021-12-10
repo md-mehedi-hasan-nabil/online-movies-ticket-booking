@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const bookingSchema = new Schema(
+const loginUserSchema = new Schema(
   {
     name: {
       type: String,
@@ -33,6 +33,6 @@ const bookingSchema = new Schema(
   }
 );
 
-const Booking = mongoose.model("booking", bookingSchema);
+const LoginUser = mongoose.model("login", loginUserSchema);
 
-module.exports = Booking;
+module.exports = LoginUser;
