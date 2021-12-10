@@ -1,12 +1,13 @@
+const { error } = require("console");
 const fs = require("fs");
+const Admin = require("../models/Admin");
 
-function getHomePage(req, res, next) {
-  fs.readFile(`${__dirname}/json/movies.json`, "utf8", function (err, data) {
-    if (err) {
-      res.status(404).send("file read fail");
-    } else {
-      res.render("index", { title: "Home Page", data: JSON.parse(data) });
+function getHomePage(req, res) {
+  Admin.find({}, (error, data) => {
+    if (error) {
+      res.render("error", { title: "error", massage: error });
     }
+    res.render("index", { title: "Home Page", data: data });
   });
 }
 

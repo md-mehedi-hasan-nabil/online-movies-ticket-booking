@@ -11,6 +11,15 @@
 
         <div class="container">
             <div class="row">
+                <div class="col-12">
+                    <% if(massage != "") { %> 
+                        <div id="alert" class="alert alert-success alert-dismissible fade show w-50 mx-auto" role="alert">
+                            <strong>Successful!</strong> <%= massage %>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                          </div>
+                        <h2> </h2>
+                    <% } %> 
+                </div>
                 <div class="col col-md-6 mx-auto py-5">
                     <form action="/admin" method="post" class="border rounded p-5">
                         <h3 class="text-center my-2">Add movies items</h3>
@@ -42,6 +51,16 @@
 
         <%- include("./partials/footer.ejs") %>
         <%- include("./partials/scripts.ejs") %>
+
+        <script>
+            const alert = document.querySelector("#alert");
+            if (alert) {
+                setTimeout(() => {
+                    alert.remove();
+                    location.replace("/admin")
+                }, 2000)
+            }
+        </script>
 
 </body>
 

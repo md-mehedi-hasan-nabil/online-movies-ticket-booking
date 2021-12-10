@@ -1,9 +1,7 @@
-// const mongoose = require("mongoose");
-// const { Schema } = mongoose;
 const Admin = require("../models/Admin");
 
 function getAdminPage(req, res) {
-  res.render("admin", { title: "Admin Dashboard" });
+  res.render("admin", { title: "Admin Dashboard", massage: "" });
 }
 
 function addMovie(req, res) {
@@ -11,14 +9,27 @@ function addMovie(req, res) {
   movieData.save(function (err) {
     if (err) {
       console.log(err);
-      res.send(err);
+      res.status("200").render("admin", {
+        title: "Admin Dashboard",
+        error: "data insert fail!"
+      });
     }
   });
-  console.log(req.body);
-  res.status("200").send("data insert successful!");
+  // res.redirect('/admin');
+  res.status("200").render("admin", {
+    title: "Admin Dashboard",
+    massage: "data insert successful!"
+  });
+}
+
+function sanitization() {
+  return [
+    check("email")
+  ];
 }
 
 module.exports = {
   getAdminPage,
   addMovie,
+  sanitization,
 };
