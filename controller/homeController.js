@@ -1,13 +1,13 @@
 const { error } = require("console");
-const fs = require("fs");
-const Admin = require("../models/Admin");
+const Admin = require("../models/Movie");
 
 function getHomePage(req, res) {
   Admin.find({}, (error, data) => {
     if (error) {
-      res.render("error", { title: "error", massage: error });
+      res.status(500).render("error", { title: "error", massage: error });
+    } else {
+      res.status(200).render("index", { title: "Home Page", data: data });
     }
-    res.render("index", { title: "Home Page", data: data });
   });
 }
 

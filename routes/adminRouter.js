@@ -1,10 +1,15 @@
 const express = require("express");
 const fs = require("fs");
-const { getAdminPage, addMovie } = require("../controller/adminController");
+const {
+  getAdminPage,
+  uploadFile,
+  sanitization,
+  addMovie,
+} = require("../controller/adminController");
 
 const router = express.Router();
 
 router.get("/", getAdminPage);
-router.post("/", addMovie);
+router.post("/", uploadFile, sanitization, addMovie);
 
 module.exports = router;

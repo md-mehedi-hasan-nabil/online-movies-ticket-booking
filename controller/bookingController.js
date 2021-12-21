@@ -1,5 +1,5 @@
 const fs = require("fs");
-const Admin = require("../models/Admin");
+const Admin = require("../models/Movie");
 
 function getBookingPage(req, res) {
   const id = req.params.id;

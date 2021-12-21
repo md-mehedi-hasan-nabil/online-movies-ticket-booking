@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const adminSchema = new Schema(
+const movieSchema = new Schema(
   {
     name: {
       type: String,
@@ -31,6 +31,6 @@ const adminSchema = new Schema(
   }
 );
 
-const Admin = mongoose.model("admin", adminSchema);
+const Movie = mongoose.model("movies", movieSchema);
 
-module.exports = Admin;
+module.exports = Movie;

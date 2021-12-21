@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 const registerUserSchema = new Schema(
   {
-    name: {
+    username: {
       type: String,
       trim: true,
       required: true,
@@ -15,17 +15,20 @@ const registerUserSchema = new Schema(
       required: true,
     },
     mobile: {
-      type: String,
+      type: Number,
       required: true,
     },
     password: {
       type: String,
-      required: true
+      required: true,
     },
-    role: {
+    gender: {
       type: String,
-      enum: ["admin", "user"],
-      default: "user"
+      required: true,
+    },
+    birthday: {
+      type: Date,
+      required: true,
     },
   },
   {
