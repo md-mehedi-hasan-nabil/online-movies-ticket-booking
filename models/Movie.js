@@ -8,7 +8,7 @@ const movieSchema = new Schema(
       trim: true,
       required: true,
     },
-    imageURL: {
+    avatar: {
       type: String,
       trim: true,
       required: true,

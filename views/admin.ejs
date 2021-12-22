@@ -21,37 +21,76 @@
                     <% } %> 
                 </div>
                 <div class="col col-md-6 mx-auto py-5">
-                    <form action="/admin" method="post" class="border rounded p-5">
+                    <form enctype="multipart/form-data" class="border rounded p-5">
                         <h3 class="text-center my-2">Add movies items</h3>
                         <div class="mb-3">
                             <label class="form-label">Movie Name</label>
-                            <input type="text" name="name" class="form-control"  />
+                            <input type="text" name="name" class="form-control name"  />
+                            <p class="error name-error"></p>
                         </div>
-                        <!-- <div class="mb-3">
-                            <label class="form-label">Image URL</label>
-                            <input type="text" name="imageURL" class="form-control"  />
-                        </div> -->
                         <div class="mb-3">
                             <label class="form-label">Image Upload</label>
-                            <input type="file" name="image" class="form-control"  />
+                            <input type="file" name="avatar" class="form-control avatar" required />
+                            <p class="error avatar-error"></p>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Movie Date</label>
-                            <input type="date" name="movieDate" id="date" class="form-control" min=<%= new Date().toISOString().split('T')[0] %>  />
+                            <input type="date" name="movieDate" id="date" class="form-control movieDate" min=<%= new Date().toISOString().split('T')[0] %> />
+                            <p class="error movieDate-error"></p>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Price</label>
-                            <input type="number" name="price" min="0" class="form-control"  />
+                            <input type="number" name="price" min="0" class="form-control price"  />
+                            <p class="error price-error"></p>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Description</label>
-                            <textarea class="form-control" name="description" rows="3"></textarea>
+                            <textarea class="form-control description" name="description" rows="3"></textarea>
+                            <p class="error description-error"></p>
+                            <p class="error common-error"></p>
                         </div>
                         <button type="submit" class="btn btn-dark w-100">Submit</button>
                     </form>
                 </div>
             </div>
         </div>
+
+        <script>
+            const form = document.querySelector("form");
+
+            form.addEventListener("submit", async function(e) {
+                e.preventDefault();
+                const formData = new FormData(form)
+                const name = document.querySelector(".name").value;
+                const fileField = document.querySelector('input[type="file"]');
+                const movieDate = document.querySelector(".movieDate").value;
+                
+                let response = await fetch("/admin", {
+                    method: "POST",
+                    body: formData
+                });
+                let result = await response.json()
+                
+                if (result.errors) {
+                    Object.keys(result.errors).forEach((fieldName)=>{
+                        console.log(form[fieldName])
+                        form[fieldName].classList.add("input-error");
+                        const errorContent = document.querySelector(`.${fieldName}-error`);
+                        errorContent.textContent = result.errors[fieldName].msg
+                    })
+                } else {
+                    swal({
+                        title: "Good job!",
+                        text: result.msg,
+                        icon: "success",
+                    });
+                    setTimeout(() => {
+                        location.reload()
+                    }, 2000);
+                }
+            });
+            
+        </script>
 
         <%- include("./partials/footer.ejs") %>
         <%- include("./partials/scripts.ejs") %>

@@ -59,3 +59,12 @@ nav {
   transition: transform 0.3s;
   transition: transform 0.3s, -webkit-transform 0.3s;
 }
+
+.input-error{
+  border: 2px solid red;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}

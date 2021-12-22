@@ -7,7 +7,7 @@ function getBookingPage(req, res) {
     if (error) {
       res.render("error", { title: "error", massage: error });
     }
-    res.render("booking", { title: "Booking Page", data: data });
+    res.render("booking", { data: data });
   });
   // fs.readFile(`${__dirname}/json/movies.json`, "utf8", function (err, data) {
   //   if (err) {

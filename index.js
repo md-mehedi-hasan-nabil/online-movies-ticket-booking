@@ -4,11 +4,13 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+
 const homeRouter = require("./routes/homeRouter");
 const loginRouter = require("./routes/loginRouter");
 const registerRouter = require("./routes/registerRouter");
 const bookingRouter = require("./routes/bookingRouter");
 const adminRouter = require("./routes/adminRouter");
+const { notFoundHandler, errorhandler } = require("./middlewares/errorHandler");
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -46,20 +48,11 @@ app.use("/booking", bookingRouter);
 app.use("/register", registerRouter);
 app.use("/admin", adminRouter);
 
-app.use((err, req, res, next) => {
-  if (err) {
-    if (err instanceof multer.MulterError) {
-      res.status(406).send(err.message);
-    } else {
-      res.status(500).send(err.message);
-    }
-  } else {
-    res.send("success");
-  }
-  //   console.log(err);
+// 404 not found handler
+app.use(notFoundHandler);
 
-  //   next();
-});
+// error handling
+app.use(errorhandler);
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`);

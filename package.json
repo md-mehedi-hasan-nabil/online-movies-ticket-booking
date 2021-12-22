@@ -27,7 +27,8 @@
     "url": "git+https://github.com/MehediHasanNabil/online-movies-ticket-booking.git"
   },
   "keywords": [
-    "Fullstack Project", "Movie Ticket Booking"
+    "Fullstack Project",
+    "Movie Ticket Booking"
   ],
   "author": "Md. Mehedi Hasan Nabil",
   "license": "ISC",

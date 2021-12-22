@@ -5,11 +5,10 @@
     <%- include("./partials/navigation.ejs") %>
 
         <div class="container" >
-            <div class="row align-items-center" style="min-height: 70vh;">
-                <h1>Error</h1>
-                <pre>
-                    <%= massage %> 
-                </pre>
+            <div style="min-height: 70vh;">
+                <p> <%= error.message %> </p>
+                <p> <%= error.status %>  </p>
+                <code> <%= error.stack %>  </code>
             </div>
         </div>
 

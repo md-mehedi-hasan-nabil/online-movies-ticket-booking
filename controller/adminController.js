@@ -1,52 +1,19 @@
 const { check, validationResult } = require("express-validator");
+const path = require("path");
+const { unlink } = require("fs");
+
 const Movie = require("../models/Movie");
-const multer = require("multer");
+const upload = require("../middlewares/uploadMulterObject");
 
 function getAdminPage(req, res) {
-  res.render("admin", { title: "Admin Dashboard", massage: "" });
+  res.render("admin", { massage: "" });
 }
 
-const UPLOAD_FOLDER = "../public/uploads";
-
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, UPLOAD_FOLDER);
-  },
-  filename: function (req, file, cb) {
-    const fileExtension = path.extname(file.originalname).toLowerCase();
-    const fileName =
-      file.originalname
-        .replace(fileExtension, "")
-        .toLowerCase()
-        .split(" ")
-        .join("-") +
-      "-" +
-      Date.now();
-    cb(null, fileName + fileExtension);
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: function (req, file, cb) {
-    const fileExtension = path.extname(file.originalname).toLowerCase();
-    if (file.fieldname === "avatar") {
-      if (
-        fileExtension === ".jpg" ||
-        fileExtension === ".jpeg" ||
-        file.mimetype === "image/png"
-      ) {
-        cb(null, true);
-      } else {
-        cb(new Error("only support .png, .jpeg, .jpg formatted file"));
-      }
-    }
-  },
-});
-
 function uploadFile(req, res, next) {
+  // call the middleware function
   upload.any()(req, res, (err) => {
     if (err) {
+      // console.log(err);
       res.status(500).json({
         errors: {
           avatar: {
@@ -62,32 +29,69 @@ function uploadFile(req, res, next) {
 
 const sanitization = [
   check("name").isLength({ min: 1 }).withMessage("name is required"),
-  check("movieDate"),
-  check("price"),
-  check("description"),
+  check("avatar")
+    .isLength({ min: 0, max: 50 })
+    .withMessage("image name 50 length must be content"),
+  check("movieDate").isDate().withMessage("give correct date"),
+  check("price")
+    .isNumeric()
+    .isLength({ min: 0, max: 1000 })
+    .withMessage("must be number"),
+  check("description")
+    .isLength({ min: 1, max: 200 })
+    .withMessage("100 length must be content"),
 ];
 
-function addMovie(req, res) {
-  const movieData = new Movie(req.body);
+function sanitizationResult(req, res, next) {
+  const errors = validationResult(req);
+  const mappedErrors = errors.mapped();
+  if (Object.keys(mappedErrors).length === 0) {
+    next();
+  } else {
+    // remove uploaded file
+    if (req.files.length > 0) {
+      const { filename } = req.files[0];
+      unlink(path.join(`${__dirname}/../public/uploads/${filename}`), (err) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    }
+    // response error
+    res.status(500).json({
+      errors: mappedErrors,
+    });
+  }
+}
 
-  // movieData.save(function (err) {
-  //   if (err) {
-  //     res.status(500).render("admin", {
-  //       title: "Admin Dashboard",
-  //       error: "data insert fail!"
-  //     });
-  //   }
-  // });
-  // // res.redirect('/admin');
-  // res.status(200).render("admin", {
-  //   title: "Admin Dashboard",
-  //   massage: "data insert successful!"
-  // });
+function addMovie(req, res) {
+  const movieData = new Movie({
+    name: req.body.name,
+    avatar: req.files[0].filename,
+    movieDate: req.body.movieDate,
+    price: req.body.price,
+    description: req.body.description,
+  });
+
+  movieData.save(function (err) {
+    if (err) {
+      res.status(500).json({
+        errors: {
+          common: {
+            msg: "server side error",
+          },
+        },
+      });
+    } else {
+      res.status(200).json({ msg: "Movie post Successful..." });
+    }
+  });
 }
 
 module.exports = {
   getAdminPage,
   uploadFile,
   sanitization,
+  sanitizationResult,
   addMovie,
 };

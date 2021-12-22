@@ -4,7 +4,6 @@ const { check, validationResult } = require("express-validator");
 
 function getRegisterPage(req, res, next) {
   res.render("register", {
-    title: "Register | Create Your Account",
     massage: "",
   });
 }
@@ -22,9 +21,7 @@ const sanitization = [
     .custom(async (value) => {
       try {
         const user = await RegisterUser.findOne({ email: value });
-      } catch {
-
-      }
+      } catch {}
     }),
 ];
 
