@@ -52,6 +52,10 @@ app.use("/dashboard", (req, res) => {
   res.render("dashboard", { title: "dashboard" });
 });
 
+var os = require("os");
+var hostname = os.hostname();
+console.log(hostname)
+
 // 404 not found handler
 app.use(notFoundHandler);
 

@@ -14,7 +14,7 @@
                 <article class="col-md-2 my-3 order-<%= Math.floor(Math.random() * data.length) %> ">
                     <div class="card shadow">
                         <div class="image-container">
-                            <img src="http://localhost:8080/uploads/<%- item.avatar %>" class="w-100 rounded" alt="<%= (item.avatar).replace(".jpg", "") %>" />
+                            <img src="/uploads/<%- item.avatar %>" class="w-100 rounded" alt="<%= (item.avatar).replace(".jpg", "") %>" />
                         </div>
                         <div class="card-body small-overlay">
                             <h6 class="card-title">
@@ -35,6 +35,7 @@
                     <article class="col-lg-3 my-3">
                         <div class="card shadow">
                             <div class="image-container">
+                                <%=  %> 
                                 <img src="http://localhost:8080/uploads/<%- item.avatar %>" class="w-100 rounded" alt="<%= (item.avatar).replace(".jpg", "") %>" />
                             </div>
                             <div class="card-body overlay">
