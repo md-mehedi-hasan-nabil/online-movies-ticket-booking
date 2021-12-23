@@ -13,6 +13,6 @@ router.get(
   htmlResponse("Register | Create Your Account"),
   getRegisterPage
 );
-router.post("/", sanitization, registerUser);
+router.post("/", registerUser);
 
 module.exports = router;

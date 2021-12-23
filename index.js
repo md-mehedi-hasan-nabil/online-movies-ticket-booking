@@ -31,10 +31,11 @@ app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname, "public")));
 
 //mongoose database
-//mehedi....20 Database
-const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.rggmg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+//mehedi....49 Database
+const uri = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.kdlsc.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
+const local_uri = "mongodb://localhost/movies-ticket-booking";
 mongoose
-  .connect("mongodb://localhost/movies-ticket-booking", {
+  .connect(uri, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -47,6 +48,9 @@ app.use("/login", loginRouter);
 app.use("/booking", bookingRouter);
 app.use("/register", registerRouter);
 app.use("/admin", adminRouter);
+app.use("/dashboard", (req, res) => {
+  res.render("dashboard", { title: "dashboard" });
+});
 
 // 404 not found handler
 app.use(notFoundHandler);

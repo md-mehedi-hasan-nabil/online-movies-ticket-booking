@@ -4,21 +4,38 @@
 <%- include("./partials/head.ejs") %>
 
 <body>
-    <header>
-        <h2 class="text-center py-4 bg-light text-uppercase border-bottom">
-            Online Movie Ticket Booking 
-        </h2>
-    </header>
     <%- include("./partials/navigation.ejs") %>
+    <%- include("./partials/banner.ejs") %> 
 
     <div class="container">
         <div class="row">
+            <h3 class="mt-2">New movies</h3>
+            <% data.forEach(item=> { %>
+                <article class="col-md-2 my-3 order-<%= Math.floor(Math.random() * data.length) %> ">
+                    <div class="card shadow">
+                        <div class="image-container">
+                            <img src="http://localhost:8080/uploads/<%- item.avatar %>" class="w-100 rounded" alt="<%= (item.avatar).replace(".jpg", "") %>" />
+                        </div>
+                        <div class="card-body small-overlay">
+                            <h6 class="card-title">
+                                <%- item.name %>
+                            </h6>
+                            <small>
+                                Price: <%- item.price %>
+                            </small>
+                        </div>
+                    </div>
+                </article>
+            <% }); %>
+        </div>
+        <div class="row">
+            <h3>Popular movies</h3>
             <% if (data) { %>
                 <% data.forEach(item=> { %>
                     <article class="col-lg-3 my-3">
                         <div class="card shadow">
                             <div class="image-container">
-                                <img src="http://localhost:8080/uploads/<%- item.avatar %>" class="w-100 rounded" alt="img" />
+                                <img src="http://localhost:8080/uploads/<%- item.avatar %>" class="w-100 rounded" alt="<%= (item.avatar).replace(".jpg", "") %>" />
                             </div>
                             <div class="card-body overlay">
                                 <h5 class="card-title">
@@ -27,19 +44,16 @@
                                 <small>
                                     Price: <%- item.price %>
                                 </small>
-                                <!-- <p class="card-text">
-                                    <%- item.description %>
-                                </p> -->
                                 <a href="/booking/<%= item._id %> " class="btn btn-light w-100">Booking Ticket</a>
                             </div>
                         </div>
                     </article>
-                    <% }); %>
-                        <% } else { %>
-                            <img src="images/loading.svg" class="w-25 mx-auto my-5 py-5" alt="loading...">
-                            <% } %>
-                        </div>
-                    </div>
+                <% }); %>
+            <% } else { %>
+                    <img src="images/loading.svg" class="w-25 mx-auto my-5 py-5" alt="loading...">
+                    <% } %>
+                </div>
+            </div>
 
     <%- include("./partials/footer.ejs") %>
     <%- include("./partials/scripts.ejs") %>

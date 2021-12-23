@@ -1,6 +1,7 @@
 const RegisterUser = require("../models/RegisterUser");
 const bcrypt = require("bcrypt");
 const { check, validationResult } = require("express-validator");
+const createError = require("http-errors");
 
 function getRegisterPage(req, res, next) {
   res.render("register", {
@@ -21,37 +22,40 @@ const sanitization = [
     .custom(async (value) => {
       try {
         const user = await RegisterUser.findOne({ email: value });
-      } catch {}
+        console.log("find email::::",user)
+        console.log(value)
+      } catch(err) {
+console.log(err)
+      }
     }),
 ];
 
 async function registerUser(req, res) {
-  try {
-    if (req.body.password !== req.body.retypePasword) {
-      throw new Error("password not match");
-    }
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
-    const newUser = new RegisterUser({
-      username: req.body.username,
-      email: req.body.email,
-      password: hashedPassword,
-      retypePasword: req.body.retypePasword,
-      mobile: req.body.mobile,
-      birthday: req.body.birthday,
-      gender: req.body.gender,
-    });
-    await newUser.save();
-    res.status(500).render("register", {
-      title: "Register | Create Your Account",
-      massage: "SignUp successful",
-    });
-  } catch (err) {
-    console.log(err);
-    res.status(200).render("register", {
-      title: "Register | Create Your Account",
-      massage: "server side error!",
-    });
-  }
+  console.log(req.body)
+  // try {
+  //   if (req.body.password !== req.body.retypePasword) {
+  //     throw createError(500, "password not match");
+  //   }
+  //   const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  //   const newUser = new RegisterUser({
+  //     username: req.body.username,
+  //     email: req.body.email,
+  //     password: hashedPassword,
+  //     retypePasword: req.body.retypePasword,
+  //     mobile: req.body.mobile,
+  //     birthday: req.body.birthday,
+  //     gender: req.body.gender,
+  //   });
+  //   await newUser.save();
+  //   res.status(200).json({
+  //     msg: "SignUp successful",
+  //   });
+  // } catch (err) {
+  //   console.log(err);
+  //   res.status(500).json({
+  //     msg: "server side error!",
+  //   });
+  // }
 }
 
 module.exports = {
