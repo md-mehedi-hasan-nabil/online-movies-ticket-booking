@@ -12,6 +12,7 @@ const registerUserSchema = new Schema(
       type: String,
       trim: true,
       lowercase: true,
+      unique: true,
       required: true,
     },
     mobile: {

@@ -6,6 +6,17 @@
 
         <div class="container" >
             <div class="row align-items-center" style="min-height: 70vh;">
+                    <% if(common.msg) { %>
+                    <div class="col-12">
+                        <div id="alert" class="alert alert-success alert-dismissible fade show w-50 mx-auto"
+                            role="alert">
+                            <strong>Successful!</strong>
+                            <p><%= common.msg %> Login your account.</p>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                    <% } %>
+                
                 <div class="col-lg-6">
                     <img src="/images/undraw_text_field_htlv.png" alt="undraw_text_field_htlv" class="img-fluid">
                 </div>
@@ -20,7 +31,7 @@
                                     <i class="fas fa-envelope"></i>
                                   </span>
                                 </div>
-                                <input type="email" class="form-control" placeholder="Enter Your Email" />
+                                <input type="email" class="form-control" placeholder="Enter Email or Username" />
                             </div>
                         </div>
                         <div class="mb-3">

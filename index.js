@@ -39,7 +39,7 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("database connection successful..."))
+  .then(() => console.log("Database connection successful..."))
   .catch((err) => console.log(err));
 
 // all routes
@@ -48,13 +48,10 @@ app.use("/login", loginRouter);
 app.use("/booking", bookingRouter);
 app.use("/register", registerRouter);
 app.use("/admin", adminRouter);
+
 app.use("/dashboard", (req, res) => {
   res.render("dashboard", { title: "dashboard" });
 });
-
-var os = require("os");
-var hostname = os.hostname();
-console.log(hostname)
 
 // 404 not found handler
 app.use(notFoundHandler);
