@@ -4,6 +4,7 @@ const {
   loginToAccount,
   loginValidator,
   loginValidatorResult,
+  logout,
 } = require("../controller/loginController");
 const { htmlResponse } = require("../middlewares/htmlResponse");
 
@@ -15,9 +16,10 @@ router.get("/", htmlResponse(PAGE_TITLE), getLoginPage);
 router.post(
   "/",
   htmlResponse(PAGE_TITLE),
-  loginToAccount,
   loginValidator,
-  loginValidatorResult
+  loginValidatorResult,
+  loginToAccount
 );
+router.delete("/", logout);
 
 module.exports = router;

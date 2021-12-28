@@ -1,12 +1,12 @@
 <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow mb-4">
     <div class="container">
-            <a class="navbar-brand" href="/">
-                <img src="/images/movie-logo.png" alt="movie-logo" class="movie-logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+        <a class="navbar-brand" href="/">
+            <img src="/images/movie-logo.png" alt="movie-logo" class="movie-logo">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item mx-2">
@@ -19,7 +19,11 @@
                     <a class="nav-link fs-5" href="/booking">Booking</a>
                 </li> -->
                 <li class="nav-item mx-2">
+                <% if (loggedInUser && loggedInUser.username) { %>
+                    <a class="nav-link fs-5 text-dark" href="#" onclick="logout()">Logout</a>
+                <% } else { %>
                     <a class="nav-link fs-5 text-dark" href="/login">Login</a>
+                <% } %>
                 </li>
             </ul>
         </div>

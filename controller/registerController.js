@@ -80,15 +80,10 @@ async function registerUser(req, res) {
       gender: req.body.gender,
     });
     await newUser.save();
-    
-    res.render("login", { common: { msg: "SignUp successful" } });
+
+    res.render("login", { success: { msg: "SignUp successful" } });
   } catch (err) {
-    console.log(err);
     res.redirect("/login");
-    // res.render("register", {
-    //   common: { msg: "Server side error!", err },
-    //   title: "Login to Account",
-    // });
   }
 }
 

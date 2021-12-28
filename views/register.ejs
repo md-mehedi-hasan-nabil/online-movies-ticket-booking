@@ -8,11 +8,11 @@
             <div class="container">
                 <div class="row align-items-center" style="min-height: 80vh;">
                     <div class="col-12">
-                        <% if(common.msg) { %>
+                        <% if(success.msg) { %>
                             <div id="alert" class="alert alert-success alert-dismissible fade show w-50 mx-auto"
                                 role="alert">
                                 <strong>Successful!</strong>
-                                <p><%= common.msg %></p>
+                                <p><%= success.msg %></p>
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         <% } %>
@@ -79,9 +79,7 @@
                                     <% if (errors.gender){ %> 
                                     <p class="error"><%= errors.gender.msg %></p>
                                     <% } %> 
-                                    <% if (common.msg){ %> 
-                                        <p class="error"><%= common.msg %></p>
-                                    <% } %> 
+                                    
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-dark w-100">Register</button>

@@ -6,6 +6,7 @@ const createError = require("http-errors");
 const RegisterUser = require("../models/RegisterUser");
 const shuffleArray = require("../lib/shuffleArray");
 const Admin = require("../models/Movie");
+const checkLogin = require("../middlewares/ProtectedRoute");
 
 function getLoginPage(req, res, next) {
   res.render("login");
@@ -67,14 +68,14 @@ async function loginToAccount(req, res) {
           secure: true,
           httpOnly: true,
         });
-        
+
         // find data for home page
         const data = await Admin.find();
         if (data) {
           res.render("index", {
             errors: {
               title: "Home page",
-              common: { msg: "Password not match." },
+              password: { msg: "Password not match." },
             },
             data: shuffleArray(data),
           });
@@ -82,14 +83,12 @@ async function loginToAccount(req, res) {
           throw createError("Database occurs error");
         }
       } else {
-        throw createError("Login Fail. Please try again.");
+        throw createError("Password not match. Please try again.");
       }
     } else {
-      throw createError("Login Fail. Please try again.");
+      throw createError("User not found. Please try again.");
     }
   } catch (error) {
-    console.log(error);
-    console.log(error.message);
     res.render("login", {
       errors: {
         common: { msg: error.message },
@@ -98,9 +97,19 @@ async function loginToAccount(req, res) {
   }
 }
 
+function logout(req, res) {
+  res.clearCookie(process.env.COOKIE_NAME);
+  res.json({
+    success: {
+      msg: "Logout success.",
+    },
+  });
+}
+
 module.exports = {
   getLoginPage,
   loginToAccount,
   loginValidator,
   loginValidatorResult,
+  logout,
 };

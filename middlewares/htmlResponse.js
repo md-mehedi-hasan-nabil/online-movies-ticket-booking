@@ -4,7 +4,7 @@ function htmlResponse(title) {
     res.locals.html = true;
     res.locals.title = `${title} - ${process.env.APPLICATION_Name} `;
     res.locals.errors = {};
-    res.locals.common = {};
+    res.locals.success = {};
     res.locals.loggedInUser = {};
     next();
   };

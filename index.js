@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const cookieParser = require('cookie-parser')
+const cookieParser = require("cookie-parser");
 
 const homeRouter = require("./routes/homeRouter");
 const loginRouter = require("./routes/loginRouter");
@@ -19,7 +19,7 @@ const port = process.env.PORT || 8080;
 // use middleware
 dotenv.config();
 app.use(cors());
-app.use(cookieParser(process.env.JWT_SECRET))
+app.use(cookieParser(process.env.COOKIE_SECRET));
 
 // parse json data
 // parse application/x-www-form-urlencoded
