@@ -62,7 +62,6 @@ function sanitizationResult(req, res, next) {
   if (errors.isEmpty()) {
     return next();
   }
-  
   res.render("register", { errors: errors.mapped() });
 }
 
