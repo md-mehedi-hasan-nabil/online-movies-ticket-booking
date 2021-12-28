@@ -4,9 +4,7 @@ const { check, validationResult } = require("express-validator");
 const createError = require("http-errors");
 
 function getRegisterPage(req, res, next) {
-  res.render("register", {
-    massage: "",
-  });
+  res.render("register");
 }
 
 const sanitization = [

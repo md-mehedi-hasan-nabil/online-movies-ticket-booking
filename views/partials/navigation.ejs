@@ -12,18 +12,20 @@
                 <li class="nav-item mx-2">
                     <a class="nav-link fs-5 text-dark" aria-current="page" href="/">Home</a>
                 </li>
-                <li class="nav-item mx-2">
-                    <a class="nav-link fs-5 text-dark" href="/admin">Admin</a>
-                </li>
-                <!-- <li class="nav-item mx-2">
+                <% if (loggedInUser && loggedInUser.role === "admin" ) { %>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link fs-5 text-dark" href="/admin">Admin</a>
+                    </li>
+                <% } %>
+                        <!-- <li class="nav-item mx-2">
                     <a class="nav-link fs-5" href="/booking">Booking</a>
                 </li> -->
                 <li class="nav-item mx-2">
-                <% if (loggedInUser && loggedInUser.username) { %>
-                    <a class="nav-link fs-5 text-dark" href="#" onclick="logout()">Logout</a>
-                <% } else { %>
-                    <a class="nav-link fs-5 text-dark" href="/login">Login</a>
-                <% } %>
+                    <% if (loggedInUser && loggedInUser.username) { %>
+                        <a class="nav-link fs-5 text-dark" href="#" onclick="logout()">Logout</a>
+                    <% } else { %>
+                        <a class="nav-link fs-5 text-dark" href="/login">Login</a>
+                    <% } %>
                 </li>
             </ul>
         </div>

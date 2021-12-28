@@ -88,6 +88,10 @@ function addMovie(req, res) {
   });
 }
 
+function getAllAuthUser() {
+  
+}
+
 module.exports = {
   getAdminPage,
   uploadFile,

@@ -54,6 +54,7 @@ async function loginToAccount(req, res) {
           email: user.email,
           mobile: user.obile,
           gender: user.gender,
+          role: user.role,
         };
 
         res.locals.loggedInUser = userInfo;
