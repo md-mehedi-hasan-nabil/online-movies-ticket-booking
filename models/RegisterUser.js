@@ -31,6 +31,11 @@ const registerUserSchema = new Schema(
       type: Date,
       required: true,
     },
+    role: {
+      type: String,
+      enum: ["admin", "user"],
+      default: "user",
+    },
   },
   {
     timestamps: true,
