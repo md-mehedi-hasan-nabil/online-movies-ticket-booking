@@ -10,7 +10,8 @@ const homeRouter = require("./routes/homeRouter");
 const loginRouter = require("./routes/loginRouter");
 const registerRouter = require("./routes/registerRouter");
 const bookingRouter = require("./routes/bookingRouter");
-const adminRouter = require("./routes/adminRouter");
+const dashboardRouter = require("./routes/admin/dashboardRouter");
+const addMoviesRouter = require("./routes/admin/addMoviesRouter");
 const { notFoundHandler, errorhandler } = require("./middlewares/errorHandler");
 
 const app = express();
@@ -42,18 +43,17 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => console.log("Database connection successful..."))
-  .catch((err) => console.log(err));
+  .catch((err) => {
+    console.log(err);
+  });
 
 // all routes
 app.use("/", homeRouter);
 app.use("/login", loginRouter);
 app.use("/booking", bookingRouter);
 app.use("/register", registerRouter);
-app.use("/admin", adminRouter);
-
-app.use("/dashboard", (req, res) => {
-  res.render("dashboard", { title: "dashboard" });
-});
+app.use("/dashboard", dashboardRouter);
+app.use("/addMovies", addMoviesRouter);
 
 // 404 not found handler
 app.use(notFoundHandler);

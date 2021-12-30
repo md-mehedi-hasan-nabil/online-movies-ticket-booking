@@ -32,11 +32,11 @@
                     <h3 class="text-center my-2">Buy Ticket</h3>
                     <div class="mb-3">
                         <label class="form-label">Email address</label>
-                        <input type="email" class="form-control" required value="mehedi@gmail.com" />
+                        <input type="email" class="form-control" required value="<%= loggedInUser.email %>" readonly />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" class="form-control" required value="mehedi" />
+                        <input type="text" class="form-control" required value="<%= loggedInUser.username %>" />
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Available Ticket</label>

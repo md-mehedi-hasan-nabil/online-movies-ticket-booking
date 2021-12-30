@@ -5,8 +5,8 @@ const { unlink } = require("fs");
 const Movie = require("../models/Movie");
 const upload = require("../middlewares/uploadMulterObject");
 
-function getAdminPage(req, res) {
-  res.render("admin", { massage: "" });
+function getAddMoviesPage(req, res) {
+  res.render("addMovies",);
 }
 
 function uploadFile(req, res, next) {
@@ -88,12 +88,10 @@ function addMovie(req, res) {
   });
 }
 
-function getAllAuthUser() {
-  
-}
+function getAllAuthUser() {}
 
 module.exports = {
-  getAdminPage,
+  getAddMoviesPage,
   uploadFile,
   sanitization,
   sanitizationResult,
